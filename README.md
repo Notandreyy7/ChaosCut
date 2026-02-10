@@ -7,15 +7,19 @@ ChaosCut é um SaaS MVP focado em streamers IRL e criadores de daily vlogs (esti
 ## 🚀 Features
 
 - ✅ Análise instantânea de lives (YouTube e Twitch)
+- ✅ **Geração automática de clipes em MP4**
+- ✅ **Download individual ou em lote de clipes**
 - ✅ Identificação automática de momentos virais
 - ✅ 5 tipos de reação: Shock, Engraçado, Caótico, Emocional, Polêmico
 - ✅ Sistema de intensidade (1-10) para cada momento
+- ✅ Duração otimizada para cada clipe (30-60s)
 - ✅ Timestamps precisos com função de copiar
 - ✅ Filtros por tipo de reação
 - ✅ Ordenação por intensidade ou timestamp
 - ✅ Interface dark mode moderna
 - ✅ Sem necessidade de login/cadastro
 - ✅ Totalmente responsivo
+- ✅ **Clipes otimizados para formato vertical (9:16)**
 
 ## 🛠️ Tech Stack
 
@@ -67,12 +71,14 @@ Acesse [http://localhost:3000](http://localhost:3000)
    - Use os filtros para encontrar tipos específicos de reação
    - Ordene por intensidade ou timestamp
    - Clique em "Copiar" para copiar o timestamp
+   - **Clique em "Gerar Clipe" para baixar um clipe individual**
+   - **Ou clique em "Gerar Todos" para baixar todos os clipes de uma vez**
 
 3. **Workflow recomendado:**
    - Encontre os melhores momentos no ChaosCut
-   - Copie os timestamps
-   - Abra seu editor de vídeo favorito
-   - Use os timestamps para criar clips virais
+   - Gere e baixe os clipes diretamente
+   - **Os clipes são mockados no MVP, mas em produção seriam vídeos MP4 reais**
+   - Publique direto no TikTok, Reels ou Shorts
 
 ## 📁 Estrutura do Projeto
 
@@ -87,9 +93,10 @@ chaoscut/
 ├── components/
 │   ├── Badge.tsx              # Badge de tipo de reação
 │   ├── Button.tsx             # Componente de botão
-│   └── MomentCard.tsx         # Card de momento clipável
+│   └── MomentCard.tsx         # Card de momento (com botão de gerar clipe)
 ├── lib/
-│   └── mock-data.ts           # Dados mockados
+│   ├── mock-data.ts           # Dados mockados
+│   └── clip-generator.ts      # Lógica de geração de clipes (mockada)
 ├── types/
 │   └── index.ts               # Tipos TypeScript
 ├── next.config.js
@@ -131,11 +138,53 @@ vercel
 
 Atualmente, o app usa dados completamente mockados. Os momentos clipáveis são gerados automaticamente para demonstração.
 
-**Para implementar com dados reais:**
-1. Integre com APIs de transcrição (ex: Whisper, AssemblyAI)
-2. Implemente análise de sentimento/emoção
-3. Adicione backend (ex: Supabase, Firebase)
-4. Configure processamento de vídeo
+### 🎬 Sobre a Geração de Clipes
+
+**No MVP atual:**
+- Os clipes são mockados (um arquivo JSON com metadados é baixado)
+- Simula o comportamento completo (loading, download, feedback visual)
+- Perfeito para demonstração e validação do conceito
+
+**Para implementar com processamento real de vídeo:**
+
+1. **Backend de Processamento:**
+   ```
+   - FFmpeg (open source, robusto)
+   - Cloudflare Stream API
+   - AWS MediaConvert
+   - Google Video Intelligence API
+   ```
+
+2. **Workflow Sugerido:**
+   ```
+   a) Usuário cola link da live
+   b) Backend baixa o vídeo (youtube-dl/yt-dlp)
+   c) API de transcrição extrai áudio e texto (Whisper, AssemblyAI)
+   d) IA analisa sentimentos e identifica momentos virais
+   e) FFmpeg corta vídeos nos timestamps identificados
+   f) Converte para formato vertical 9:16 (crop inteligente)
+   g) Comprime para tamanho otimizado (< 50MB)
+   h) Upload para storage (S3, Cloudflare R2)
+   i) Retorna links de download para o usuário
+   ```
+
+3. **Stack Recomendada para Produção:**
+   ```
+   - Backend: Node.js / Python
+   - Queue: BullMQ / Celery (processamento assíncrono)
+   - Storage: AWS S3 / Cloudflare R2
+   - Database: PostgreSQL / Supabase
+   - Video Processing: FFmpeg + GPU acceleration
+   - AI: OpenAI Whisper + GPT-4 para análise de sentimentos
+   ```
+
+4. **Custo Estimado (para escala):**
+   ```
+   - Transcrição: ~$0.006/minuto (AssemblyAI)
+   - Processamento: AWS EC2 spot instances
+   - Storage: ~$0.023/GB/mês (S3)
+   - Análise de sentimentos: GPT-4 API
+   ```
 
 ## 🎯 Público-Alvo
 

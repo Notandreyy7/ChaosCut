@@ -7,6 +7,7 @@ export interface ClipMoment {
   reactionType: ReactionType;
   transcript: string;
   intensity: number; // 1-10
+  clipDuration: number; // Duração sugerida do clipe em segundos
 }
 
 export interface AnalysisResult {

@@ -8,6 +8,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Shock',
     transcript: 'BRO WHAT?! NO WAY! ARE YOU KIDDING ME RIGHT NOW?!',
     intensity: 9,
+    clipDuration: 45,
   },
   {
     id: '2',
@@ -16,6 +17,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Engraçado',
     transcript: 'Chat, this is the funniest thing I\'ve ever seen in my life hahahaha',
     intensity: 8,
+    clipDuration: 30,
   },
   {
     id: '3',
@@ -24,6 +26,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Caótico',
     transcript: 'EVERYONE GET IN HERE! THIS IS INSANE! THE WHOLE ROOM IS GOING CRAZY!',
     intensity: 10,
+    clipDuration: 60,
   },
   {
     id: '4',
@@ -32,6 +35,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Emocional',
     transcript: 'Man... this really means a lot to me. I appreciate all of you so much.',
     intensity: 7,
+    clipDuration: 35,
   },
   {
     id: '5',
@@ -40,6 +44,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Polêmico',
     transcript: 'Okay chat, I\'m gonna say something controversial but hear me out...',
     intensity: 8,
+    clipDuration: 50,
   },
   {
     id: '6',
@@ -48,6 +53,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Shock',
     transcript: 'WAIT WAIT WAIT! DID THAT JUST HAPPEN?! REPLAY THAT!',
     intensity: 9,
+    clipDuration: 40,
   },
   {
     id: '7',
@@ -56,6 +62,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Engraçado',
     transcript: 'I can\'t breathe bro, I\'m actually crying laughing right now',
     intensity: 9,
+    clipDuration: 55,
   },
   {
     id: '8',
@@ -64,6 +71,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Caótico',
     transcript: 'EVERYONE SPAM THE CHAT! THIS IS THE MOMENT! GO GO GO!',
     intensity: 10,
+    clipDuration: 45,
   },
   {
     id: '9',
@@ -72,6 +80,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Shock',
     transcript: 'NO SHOT! THERE\'S ABSOLUTELY NO WAY THIS IS REAL!',
     intensity: 10,
+    clipDuration: 38,
   },
   {
     id: '10',
@@ -80,6 +89,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Emocional',
     transcript: 'This is why I do this every day. You guys are the best community.',
     intensity: 6,
+    clipDuration: 42,
   },
   {
     id: '11',
@@ -88,6 +98,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Engraçado',
     transcript: 'Chat is wilding right now LMAOOO this is too funny',
     intensity: 7,
+    clipDuration: 33,
   },
   {
     id: '12',
@@ -96,6 +107,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Polêmico',
     transcript: 'Alright, time to address the drama. Here\'s what really happened...',
     intensity: 9,
+    clipDuration: 58,
   },
   {
     id: '13',
@@ -104,6 +116,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Caótico',
     transcript: 'THE WHOLE STREAM IS BREAKING! THIS IS COMPLETE CHAOS!',
     intensity: 9,
+    clipDuration: 48,
   },
   {
     id: '14',
@@ -112,6 +125,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Shock',
     transcript: 'I\'M SHAKING RIGHT NOW! THIS CAN\'T BE HAPPENING!',
     intensity: 8,
+    clipDuration: 44,
   },
   {
     id: '15',
@@ -120,6 +134,7 @@ const mockMoments: ClipMoment[] = [
     reactionType: 'Engraçado',
     transcript: 'Yo I\'m actually dead, someone call an ambulance I can\'t stop laughing',
     intensity: 8,
+    clipDuration: 51,
   },
 ];
 

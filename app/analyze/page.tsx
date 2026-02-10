@@ -7,7 +7,8 @@ import { getMockAnalysis } from '@/lib/mock-data';
 import { MomentCard } from '@/components/MomentCard';
 import { Button } from '@/components/Button';
 import { ReactionType } from '@/types';
-import { ArrowLeft, Filter, Youtube, TwitchIcon, Zap } from 'lucide-react';
+import { ArrowLeft, Filter, Youtube, TwitchIcon, Zap, Download } from 'lucide-react';
+import { generateClip } from '@/lib/clip-generator';
 
 function AnalyzeContent() {
   const searchParams = useSearchParams();
@@ -16,6 +17,8 @@ function AnalyzeContent() {
 
   const [selectedFilter, setSelectedFilter] = useState<ReactionType | 'all'>('all');
   const [sortBy, setSortBy] = useState<'timestamp' | 'intensity'>('intensity');
+  const [isGeneratingAll, setIsGeneratingAll] = useState(false);
+  const [generatedCount, setGeneratedCount] = useState(0);
 
   const reactionTypes: Array<{ value: ReactionType | 'all'; label: string; emoji: string }> = [
     { value: 'all', label: 'Todos', emoji: '🎬' },
@@ -43,6 +46,29 @@ function AnalyzeContent() {
 
     return moments;
   }, [analysis.moments, selectedFilter, sortBy]);
+
+  const handleGenerateAllClips = async () => {
+    setIsGeneratingAll(true);
+    setGeneratedCount(0);
+
+    for (let i = 0; i < filteredAndSortedMoments.length; i++) {
+      const moment = filteredAndSortedMoments[i];
+      try {
+        await generateClip(
+          moment.id,
+          moment.timestamp,
+          moment.clipDuration,
+          moment.reactionType
+        );
+        setGeneratedCount(i + 1);
+      } catch (error) {
+        console.error(`Erro ao gerar clipe ${moment.id}:`, error);
+      }
+    }
+
+    setIsGeneratingAll(false);
+    setTimeout(() => setGeneratedCount(0), 3000);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-black">
@@ -165,7 +191,7 @@ function AnalyzeContent() {
         </div>
 
         {/* Results Count */}
-        <div className="mb-6">
+        <div className="mb-6 flex items-center justify-between">
           <p className="text-zinc-400">
             Mostrando <span className="text-white font-semibold">{filteredAndSortedMoments.length}</span> {filteredAndSortedMoments.length === 1 ? 'momento' : 'momentos'}
             {selectedFilter !== 'all' && (
@@ -174,12 +200,37 @@ function AnalyzeContent() {
               </span>
             )}
           </p>
+
+          {filteredAndSortedMoments.length > 0 && (
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={handleGenerateAllClips}
+              disabled={isGeneratingAll}
+            >
+              {isGeneratingAll ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                  Gerando {generatedCount}/{filteredAndSortedMoments.length}...
+                </>
+              ) : generatedCount > 0 ? (
+                <>
+                  ✅ {generatedCount} clipes baixados!
+                </>
+              ) : (
+                <>
+                  <Download className="w-4 h-4 mr-2" />
+                  Gerar Todos ({filteredAndSortedMoments.length})
+                </>
+              )}
+            </Button>
+          )}
         </div>
 
         {/* Moments List */}
         <div className="grid gap-4">
           {filteredAndSortedMoments.map((moment) => (
-            <MomentCard key={moment.id} moment={moment} />
+            <MomentCard key={moment.id} moment={moment} videoUrl={analysis.videoUrl} />
           ))}
         </div>
 

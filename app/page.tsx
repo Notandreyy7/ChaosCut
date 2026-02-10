@@ -137,10 +137,10 @@ export default function Home() {
                 <TrendingUp className="w-8 h-8 text-purple-400" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">
-                3. Crie clips virais
+                3. Baixe os clipes
               </h3>
               <p className="text-zinc-400 text-sm">
-                Use os timestamps para editar e publicar
+                Gere e baixe clipes prontos em MP4, otimizados para redes sociais
               </p>
             </div>
           </div>
@@ -148,6 +148,15 @@ export default function Home() {
 
         {/* Features */}
         <div className="mt-24 grid md:grid-cols-2 gap-6">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="text-purple-400 font-semibold mb-2">
+              ✂️ Gera Clipes Automaticamente
+            </div>
+            <p className="text-zinc-400 text-sm">
+              Baixe clipes prontos em MP4, otimizados para vertical (9:16)
+            </p>
+          </div>
+
           <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
             <div className="text-purple-400 font-semibold mb-2">
               ⚡ Análise por Reação
@@ -159,10 +168,10 @@ export default function Home() {
 
           <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
             <div className="text-purple-400 font-semibold mb-2">
-              🎯 Timestamps Precisos
+              📦 Download em Lote
             </div>
             <p className="text-zinc-400 text-sm">
-              Copie e cole direto no seu editor de vídeo
+              Gere e baixe todos os clipes de uma vez com um clique
             </p>
           </div>
 
@@ -172,6 +181,15 @@ export default function Home() {
             </div>
             <p className="text-zinc-400 text-sm">
               Veja quais momentos têm mais potencial viral
+            </p>
+          </div>
+
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="text-purple-400 font-semibold mb-2">
+              🎯 Duração Otimizada
+            </div>
+            <p className="text-zinc-400 text-sm">
+              Cada clipe tem a duração ideal para Shorts, Reels e TikTok
             </p>
           </div>
 
