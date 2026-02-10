@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaos Cut | Sistema de Cortes</title>
+    <style>
+        :root {
+            --primary: #ff4500;
+            --bg: #0a0a0a;
+            --card-bg: #161616;
+            --text: #ffffff;
+            --success: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body { background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        header { padding: 2rem; display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-transform: uppercase; }
+
+        .container { text-align: center; padding: 60px 20px; }
+        
+        h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to right, #ff4500, #8a2be2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Área de Input */
+        .input-group {
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            border: 1px solid #333;
+        }
+
+        input { background: transparent; border: none; padding: 10px 20px; color: white; flex-grow: 1; outline: none; }
+
+        button { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 69, 0, 0.4); }
+
+        /* Loading State */
+        #loading { display: none; margin: 40px auto; }
+        .spinner {
+            width: 50px; height: 50px; border: 5px solid #333; border-top: 5px solid var(--primary);
+            border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Card de Resultado */
+        #result-area {
+            display: none;
+            max-width: 350px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .video-preview {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: #000;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #222;
+        }
+
+        .btn-download { background: var(--success); width: 100%; text-decoration: none; display: block; padding: 15px; border-radius: 10px; margin-top: 10px; }
+
+    </style>
+</head>
+<body>
+
+    <header><div class="logo">Chaos Cut</div></header>
+
+    <div class="container">
+        <h1>Cortar Live do Speed/Kai</h1>
+        <p style="margin-bottom: 30px; color: #888;">Cole o link e deixe a IA encontrar o caos.</p>
+
+        <div class="input-group">
+            <input type="text" id="videoUrl" placeholder="Link da Twitch ou YouTube...">
+            <button onclick="processarCorte()">Gerar Corte Viral</button>
+        </div>
+
+        <div id="loading">
+            <div class="spinner"></div>
+            <p id="status-text">Analisando picos de áudio...</p>
+        </div>
+
+        <div id="result-area">
+            <div class="video-preview">
+                <span style="color: #444;">[ Preview do Vídeo Vertical ]</span>
+            </div>
+            <h3>O Caos foi domado! 🔥</h3>
+            <p style="font-size: 0.9rem; color: #888; margin: 10px 0;">30 segundos detectados com sucesso.</p>
+            <a href="#" id="downloadLink" download="chaos_cut_viral.mp4" class="btn-download">📥 Baixar para TikTok/Reels</a>
+        </div>
+    </div>
+
+    <script>
+        function processarCorte() {
+            const url = document.getElementById('videoUrl').value;
+            if (!url) return alert("Por favor, cole um link!");
+
+            // Esconde o botão e mostra o loading
+            document.querySelector('.input-group').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            // Simulação de etapas do Backend (FFmpeg + IA)
+            const etapas = [
+                "Baixando stream...",
+                "Identificando gritos e risadas...",
+                "Aplicando crop 9:16 (Face detection)...",
+                "Renderizando MP4 final..."
+            ];
+
+            let i = 0;
+            const intervalo = setInterval(() => {
+                document.getElementById('status-text').innerText = etapas[i];
+                i++;
+                if (i >= etapas.length) {
+                    clearInterval(intervalo);
+                    mostrarResultado();
+                }
+            }, 2000); // Muda a cada 2 segundos para simular processamento
+        }
+
+        function mostrarResultado() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+            
+            // Aqui você passaria a URL real gerada pelo seu backend em Python/Node
+            document.getElementById('downloadLink').href = "caminho/para/seu/video_processado.mp4";
+        }
+    </script>
+</body>
+</html>
